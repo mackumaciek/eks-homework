@@ -47,4 +47,7 @@ jobs:
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
-      
+
+    - name: Deploy
+      run: |
+        helm install my-release oci://registry-1.docker.io/bitnamicharts/wordpress   

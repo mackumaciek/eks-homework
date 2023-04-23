@@ -11,6 +11,9 @@ permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
 
+env:
+  AWS_REGION : "eu-central-1"
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -24,6 +27,7 @@ jobs:
       with:
         role-to-assume: "arn:aws:iam::867736273741:role/gh_actions_admin_role"
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1

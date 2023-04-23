@@ -57,4 +57,4 @@ jobs:
       with:
         base64-kube-config: ${{ env.KUBECONFIG }}
     - run: |
-        kubectl get po -A
+        kubectl get configmap aws-auth -n kube-system -o yaml

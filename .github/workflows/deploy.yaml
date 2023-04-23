@@ -51,3 +51,10 @@ jobs:
     - name: Deploy
       run: |
         helm install my-release oci://registry-1.docker.io/bitnamicharts/wordpress   
+
+    - name: view results
+      uses: tale/kubectl-action@v1
+      with:
+        base64-kube-config: ${{ env.KUBECONFIG }}
+    - run: |
+        kubectl get po -A

@@ -48,9 +48,9 @@ jobs:
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
 
-    - name: Deploy
-      run: |
-        helm install my-release oci://registry-1.docker.io/bitnamicharts/wordpress   
+#     - name: Deploy
+#       run: |
+#         helm install my-release oci://registry-1.docker.io/bitnamicharts/wordpress   
 
     - name: view results
       uses: tale/kubectl-action@v1

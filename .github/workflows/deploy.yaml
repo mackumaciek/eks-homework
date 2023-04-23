@@ -57,4 +57,26 @@ jobs:
       with:
         base64-kube-config: ${{ env.KUBECONFIG }}
     - run: |
-        kubectl get configmap aws-auth -n kube-system -o yaml
+        kubectl apply -f - <<EOF
+        apiVersion: v1
+        data:
+          mapRoles: |
+            - groups:
+              - system:bootstrappers
+              - system:nodes
+              rolearn: arn:aws:iam::867736273741:role/homework-Worker-Role
+              username: system:node:{{EC2PrivateDNSName}}
+          mapUsers: |
+            - userarn: arn:aws:iam::867736273741:user/tlyko
+              username: tlyko
+              groups:
+                - system:masters
+        kind: ConfigMap
+        metadata:
+          creationTimestamp: "2023-04-23T18:25:17Z"
+          name: aws-auth
+          namespace: kube-system
+          resourceVersion: "1004"
+          uid: fabfe260-7279-4c60-8e20-0cff5bec7fca
+        EOF
+

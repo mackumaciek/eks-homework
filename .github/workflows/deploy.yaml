@@ -40,3 +40,13 @@ jobs:
         base64-kube-config: ${{ env.KUBECONFIG }}
     - run: |
         kubectl get nodes
+
+    - name: Deploy Wordpress
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'wordpress'
+        namespace: 'default'
+        chart: 'app'
+      env:
+        KUBECONFIG_FILE: '${{ env.KUBECONFIG }}'
+      

@@ -30,7 +30,8 @@ jobs:
         aws eks update-kubeconfig \
           --region ${{ env.AWS_REGION }} \
           --name homework-cluster \
-          --kubeconfig $KUBECONFIG
+          --kubeconfig kubeconfig.yaml
+        echo "KUBECONFIG=$GITHUB_WORKSPACE/kubeconfig.yaml" >> $GITHUB_ENV
 
     - name: Deploy to EKS
       uses: tale/kubectl-action@v1
